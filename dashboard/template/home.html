@@ -1,0 +1,671 @@
+{% extends "base/dashboard.html" %} {% load static %} {% block content %}
+
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">
+          <strong>Metricas</strong>
+        </h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Metricas</li>
+        </ol>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong>Filtrar la base de datos</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+            <form action="" method="post" novalidate>
+              {% csrf_token %}
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Seleccionar año</span>
+                </div>
+                {{form}}
+                <span class="input-group-append">
+                  <button type="submit" class="btn btn-info btn-flat">
+                    OK
+                  </button>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong>Información</strong>
+            </h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              Utilice el menú de selección de año para filtrar la base de datos
+              y observe cómo varía la información en las cajas de información y
+              la tabla. Explore el historial completo y navegue a través del
+              gráfico interactivo para obtener una visión más detallada.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3>{{Ndata}}</h3>
+
+            <p>Total datos</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <a href="#" class="small-box-footer"
+            >Mas info <i class="fas fa-arrow-circle-right"></i
+          ></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3>{{MeanCloseData}}<sup style="font-size: 20px"> USD</sup></h3>
+
+            <p>Precio de cierre promedio</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <a href="#" class="small-box-footer"
+            >Mas info <i class="fas fa-arrow-circle-right"></i
+          ></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3>{{MaxCloseData}}<sup style="font-size: 20px"> USD</sup></h3>
+
+            <p>Precio de cierre maximo</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <a href="#" class="small-box-footer"
+            >Mas info <i class="fas fa-arrow-circle-right"></i
+          ></a>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+          <div class="inner">
+            <h3>{{MinCloseData}}<sup style="font-size: 20px"> USD</sup></h3>
+
+            <p>Precio de cierre minimo</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <a href="#" class="small-box-footer"
+            >Mas info <i class="fas fa-arrow-circle-right"></i
+          ></a>
+        </div>
+      </div>
+      <!-- ./col -->
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong>Resumen mensual</strong>
+            </h5>
+            <div class="card-tools">
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+              <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-tool dropdown-toggle"
+                  data-toggle="dropdown"
+                >
+                  <i class="fas fa-wrench"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                  <a href="#" class="dropdown-item">Action</a>
+                  <a href="#" class="dropdown-item">Another action</a>
+                  <a href="#" class="dropdown-item">Something else here</a>
+                  <a class="dropdown-divider"></a>
+                  <a href="#" class="dropdown-item">Separated link</a>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="remove"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            {{ table_data | safe }}
+            <tfoot>
+              <th></th>
+            </tfoot>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-6">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong>Grafico interactivo</strong>
+            </h5>
+            <div class="card-tools">
+              <ul class="nav nav-pills ml-auto">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    href="#area-chart"
+                    data-toggle="tab"
+                    >Area</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#box-chart" data-toggle="tab"
+                    >Velas</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content p-0">
+              <div class="chart tab-pane active" id="area-chart">
+                <div
+                  id="echartexample1"
+                  style="width: 100%; height: 400px"
+                ></div>
+              </div>
+              <div class="chart tab-pane" id="box-chart">
+                <div id="echartbox" style="width: 800px; height: 400px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong
+                >Aporte porcentual de precio de cierre promedio por mes</strong
+              >
+            </h5>
+            <div class="card-tools">
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i class="fas fa-minus"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="remove"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="echartexample2" style="width: 100%; height: 400px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- page script -->
+
+<!-- jQuery -->
+<script
+  type="text/JavaScript"
+  src="{% static 'adminlte/plugins/jquery/jquery.min.js' %}"
+></script>
+
+<!-- Datatable Rutina -->
+<script>
+  $(function () {
+    $("#test").DataTable({
+      dom: "Bfrtip",
+      buttons: ["searchBuilder", "copy", "csv", "excel", "pdf", "colvis"],
+      responsive: true,
+      lengthChange: false,
+      autoWidth: false,
+      createdRow: function (row, data, dataIndex) {
+        if (data[5] < 0) {
+          $(row)
+            .find("td:eq(2)")
+            .addClass("table-danger")
+            .html(
+              "<span class='fas fa-caret-down' style='margin-right: 10px;'></span>" +
+                data[2]
+            );
+          $(row)
+            .find("td:eq(5)")
+            .addClass("table-danger")
+            .html(
+              "<span class='fas fa-caret-down' style='margin-right: 10px;'></span>" +
+                data[5] +
+                "%"
+            );
+        } else if (data[5] > 0) {
+          $(row)
+            .find("td:eq(2)")
+            .addClass("table-success")
+            .html(
+              "<span class='fas fa-caret-up' style='margin-right: 10px;'></span>" +
+                data[2]
+            );
+          $(row)
+            .find("td:eq(5)")
+            .addClass("table-success")
+            .html(
+              "<span class='fas fa-caret-up' style='margin-right: 10px;'></span>" +
+                data[5] +
+                "%"
+            );
+        }
+      },
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json",
+        buttons: {
+          copy: "Copiar",
+          colvis: "Cambiar columnas",
+        },
+        searchBuilder: {
+          button: "Filtrar",
+          add: "Agregar",
+          clearAll: "Reiniciar",
+          condition: "Operador",
+          conditions: {
+            date: {
+              before: "Antes de",
+              after: "Después de",
+              equals: "Igual a",
+              not: "Diferente de",
+              between: "Entre",
+              notBetween: "No entre",
+              empty: "Vacío",
+              notEmpty: "No vacío",
+            },
+            moment: {
+              before: "Antes de",
+              after: "Después de",
+              equals: "Igual a",
+              not: "Diferente de",
+              between: "Entre",
+              notBetween: "No entre",
+              empty: "Vacío",
+              notEmpty: "No vacío",
+            },
+            number: {
+              equals: "Igual a",
+              not: "Diferente de",
+              gt: "Mayor que",
+              gte: "Mayor o igual que",
+              lt: "Menor que",
+              lte: "Menor o igual que",
+              between: "Entre",
+              notBetween: "No entre",
+              empty: "Vacío",
+              notEmpty: "No vacío",
+            },
+            string: {
+              contains: "Contiene",
+              empty: "Vacío",
+              notEmpty: "No vacío",
+              equals: "Igual a",
+              not: "Diferente de",
+              endsWith: "Termina con",
+              startsWith: "Comienza con",
+            },
+          },
+          data: "Columna",
+          logicAnd: "Y",
+          logicOr: "O",
+          title: {
+            0: "Ningún Filtro activo",
+            _: "Filtros activos (%d)",
+          },
+          deleteTitle: "Eliminar",
+          leftTitle: "Izquierda",
+          rightTitle: "Derecha",
+          value: "Valor",
+        },
+      },
+    });
+  });
+</script>
+
+<!-- Echart Rutina -->
+{{ EchartData1Y|json_script:"EchartData1Y" }}
+{{EchartData1X|json_script:"EchartData1X" }}
+{{EchartData1YF|json_script:"EchartData1YF"}}
+{{EchartData1XF|json_script:"EchartData1XF"}}
+<script>
+  // Initialize the echarts instance based on the prepared dom
+  var myChart = echarts.init(document.getElementById("echartexample1"));
+  // Specify the configuration items and data for the chart
+  // const values = JSON.parse('{{EchartData1Y|escapejs}}'); Don't use this, it's vulnerable to script injection (XSS)
+  const mylabel = JSON.parse(
+    document.getElementById("EchartData1X").textContent
+  );
+  const values = JSON.parse(
+    document.getElementById("EchartData1Y").textContent
+  );
+  const valuesF = JSON.parse(
+    document.getElementById("EchartData1YF").textContent
+  );
+  const mylabelF = JSON.parse(
+    document.getElementById("EchartData1XF").textContent
+  );
+
+  function agregarNulosAlPrincipio(listaPrincipal, listaSecundaria) {
+    // Obtener la longitud de la lista secundaria
+    let cantidadNulos = listaSecundaria.length;
+
+    // Crear una nueva lista con la cantidad correcta de valores nulos
+    let listaNulos = new Array(cantidadNulos).fill(null);
+
+    // Concatenar la lista de nulos con la lista principal
+    let listaResultante = listaNulos.concat(listaPrincipal);
+
+    return listaResultante;
+  }
+
+  var option = {
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      name: "Fecha",
+      data: mylabel.concat(mylabelF),
+    },
+    yAxis: {
+      type: "value",
+      name: "Precio de Cierre ($)",
+    },
+    legend: {
+      data: ["Historial", "Futuro"],
+      left: 10,
+    },
+    series: [
+      {
+        data: values,
+        type: "line",
+        name: "Historial",
+        stack: "Total",
+        symbol: "none",
+        sampling: "lttb",
+        itemStyle: {
+          color: "#007bff",
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "#39cccc",
+            },
+            {
+              offset: 1,
+              color: "#007bff",
+            },
+          ]),
+        },
+        markPoint: {
+          data: [
+            { type: "max", name: "Max" },
+            { type: "min", name: "Min" },
+          ],
+        },
+        markLine: {
+          data: [{ type: "average", name: "Avg" }],
+        },
+      },
+      {
+        name: "Futuro",
+        type: "line",
+        stack: "Total",
+        itemStyle: {
+          color: "#28a745",
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "#39cccc",
+            },
+            {
+              offset: 1,
+              color: "#28a745",
+            },
+          ]),
+        },
+        emphasis: {
+          focus: "series",
+        },
+        data: agregarNulosAlPrincipio(valuesF, values),
+      },
+    ],
+    tooltip: {
+      trigger: "axis",
+      position: function (pt) {
+        return [pt[0], "10%"];
+      },
+    },
+    toolbox: {
+      feature: {
+        dataZoom: {
+          yAxisIndex: "none",
+        },
+        restore: {},
+        saveAsImage: {},
+        magicType: { type: ["line", "bar"] },
+      },
+    },
+    dataZoom: [
+      {
+        type: "inside",
+        start: 90,
+        end: 100,
+      },
+      {
+        start: 90,
+        end: 100,
+      },
+    ],
+  };
+
+  // Display the chart using the configuration items and data just specified.
+  myChart.setOption(option);
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+</script>
+
+{{EchartDataBoxName|json_script:"EchartDataBoxName"}}
+{{EchartDataBoxValue|json_script:"EchartDataBoxValue"}}
+
+<script>
+  // Initialize the echarts instance based on the prepared dom
+
+  var myChart3 = echarts.init(document.getElementById("echartbox"));
+  const boxlabel = JSON.parse(
+    document.getElementById("EchartDataBoxName").textContent
+  );
+  const boxvalue = JSON.parse(
+    document.getElementById("EchartDataBoxValue").textContent
+  );
+
+  var option = {
+    xAxis: {
+      data: boxlabel,
+      name: "Año",
+    },
+    tooltip: {
+      trigger: "item",
+    },
+    yAxis: {
+      name: "Precio en USD",
+    },
+    series: [
+      {
+        type: "candlestick",
+        data: boxvalue,
+      },
+    ],
+  };
+  // Display the chart using the configuration items and data just specified.
+  myChart3.setOption(option);
+  window.addEventListener("resize", function () {
+    myChart3.resize();
+  });
+</script>
+
+<script>
+  // Initialize the echarts instance based on the prepared dom
+
+  var myChart2 = echarts.init(document.getElementById("echartexample2"));
+
+  var option = {
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b}: {c} ({d}%)",
+    },
+    legend: {
+      data: [
+        "Direct",
+        "Marketing",
+        "Search Engine",
+        "Email",
+        "Union Ads",
+        "Video Ads",
+        "Baidu",
+        "Google",
+        "Bing",
+        "Others",
+      ],
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        selectedMode: "single",
+        radius: [0, "30%"],
+        label: {
+          position: "inner",
+          fontSize: 14,
+        },
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: 1548, name: "Search Engine" },
+          { value: 775, name: "Direct" },
+          { value: 679, name: "Marketing", selected: true },
+        ],
+      },
+      {
+        name: "Access From",
+        type: "pie",
+        radius: ["45%", "60%"],
+        labelLine: {
+          length: 30,
+        },
+        label: {
+          formatter: "{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ",
+          backgroundColor: "#F6F8FC",
+          borderColor: "#8C8D8E",
+          borderWidth: 1,
+          borderRadius: 4,
+          rich: {
+            a: {
+              color: "#6E7079",
+              lineHeight: 22,
+              align: "center",
+            },
+            hr: {
+              borderColor: "#8C8D8E",
+              width: "100%",
+              borderWidth: 1,
+              height: 0,
+            },
+            b: {
+              color: "#4C5058",
+              fontSize: 14,
+              fontWeight: "bold",
+              lineHeight: 33,
+            },
+            per: {
+              color: "#fff",
+              backgroundColor: "#4C5058",
+              padding: [3, 4],
+              borderRadius: 4,
+            },
+          },
+        },
+        data: [
+          { value: 1048, name: "Baidu" },
+          { value: 335, name: "Direct" },
+          { value: 310, name: "Email" },
+          { value: 251, name: "Google" },
+          { value: 234, name: "Union Ads" },
+          { value: 147, name: "Bing" },
+          { value: 135, name: "Video Ads" },
+          { value: 102, name: "Others" },
+        ],
+      },
+    ],
+  };
+  // Display the chart using the configuration items and data just specified.
+  myChart2.setOption(option);
+  window.addEventListener("resize", function () {
+    myChart2.resize();
+  });
+</script>
+
+{% endblock %}
